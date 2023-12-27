@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="icon.png" type="image/png">
+    <title>Aviana</title>
+    <style>
+        @media (max-width: 768px){
+            *{
+                transition: all .5s ease-in-out;
+            }
+            html{
+                background: #121111;
+            }
+            .main-content{
+                height: 100%;
+                width: auto;
+                background: url(landing_background.png);
+                background-position: -200px;
+            }
+            .sub-content{
+                background: inherit;
+                height: 56em;
+                width: auto;
+                padding-top: 100%;
+                justify-content: center;
+                align-items: center;
+            }
+            h1{
+                width: 70%;
+                margin:auto;
+            }
+            span{
+                width: 70%;
+                margin: auto;
+                text-align: center;
+                padding: 50%;
+            }
+            a{
+                margin: auto;
+                font-size: 40px;
+                text-decoration: none;
+                color: rgb(0, 0, 0);
+                font-family: cursive;
+                letter-spacing: 10px;
+            }
+            a#back{
+                font-family:fantasy;
+                font-size: 60px;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <nav>
+            <a href="index.html" id="back"><<<</a>
+        </nav>
+        <div class="sub-content">
+            <h1>
+                <a href="" class="typewrite" data-period="2000" data-type='[ "Happy Birthday Aviiii" , "Always be Happy and keep smiling" , "I wish you a very happy birthday Aviana" ]'>
+                <span class="wrap"></span>
+                </a>
+            </h1>
+        </div>
+    </div>
+</body>
+<script>
+    const typewriter = document.querySelector('.typewrite');
+
+const data = JSON.parse(typewriter.getAttribute('data-type'));
+let dataIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+function type() {
+  const currentDataIndex = dataIndex % data.length;
+  const currentText = data[currentDataIndex];
+  const speed = isDeleting ? 50 : 150;
+
+  if (!isDeleting && charIndex === currentText.length) {
+    setTimeout(() => {
+      isDeleting = true;
+    }, 1500);
+  }
+
+  if (isDeleting && charIndex === 0) {
+    dataIndex++;
+    isDeleting = false;
+    typewriter.setAttribute('data-period', '2000');
+
+  }
+
+  typewriter.innerHTML = currentText.substring(0, charIndex);
+  
+  if (!isDeleting) {
+    charIndex++;
+  } else {
+    charIndex--;
+  }
+
+  setTimeout(type, speed);
+}
+document.addEventListener('DOMContentLoaded', type);
+</script>
+</html>
